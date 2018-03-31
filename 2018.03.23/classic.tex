@@ -4,10 +4,9 @@
 \begin{document}
 
 
-
 \section{Problem}
 
-"Imagine taking a number and moving its last digit to the front. 
+"Imagine taking a number and moving its last digit to the front.
 For example, 1,234 would become 4,123. What is the smallest positive 
 integer such that when you do this, the result is exactly double the 
 original number? (For bonus points, solve this one without a 
@@ -15,45 +14,98 @@ computer.)"
 
 \section{Solution}
 
-Let's begin by writing out numbers in the following form\bigskip
+Let's begin by writing our numbers in the following form\smallskip
 
-$10^Nd_N+10^{N-1}d_{N-1}+\cdots+10^1d_1+10^0d_0=\sum^N_{n=0}10^nd_n 
-\newline \indent \mbox{ where }d_n \in \{0,1,2,\ldots,9\}$\bigskip
+\begin{equation}
+\begin{aligned}
+\label{eq:5} & 10^Nd_N+10^{N-1}d_{N-1}+\cdots+10^1d_1+10^0d_0 = 
+\sum^N_{n=0}10^nd_n \\ & \mbox{ where }d_n \in \{0,1,2,\ldots,9\}
+\end{aligned}
+\end{equation}
+\smallskip
 
 \noindent We are looking for a number that satisfies the following 
-equality\bigskip
+equality\smallskip
 
-$2\sum^N_{n=0}10^nd_n=10^Nd_0+\sum^N_{n=1}10^{n-1}d_n$\bigskip
+\begin{equation}
+2\sum^N_{n=0}10^nd_n=10^Nd_0+\sum^N_{n=1}10^{n-1}d_n\smallskip
+\end{equation}
 
-\noindent Rearranging we get\bigskip
+\noindent Rearranging we get\smallskip
 
-$\sum^N_{n=1}(2*10^n-10^{n-1})d_n=(10^N-2*10^0)d_0$\bigskip
+\begin{equation}
+\sum^N_{n=1}(2 \cdot 10^n-10^{n-1})d_n=(10^N-2 \cdot 10^0)d_0\smallskip
+\end{equation}
 
-\noindent Note that $2*10^n-10^{n-1}=19*10^{n-1}$.  As such we rewrite 
-the equation as follows\bigskip
+\noindent Note that $2 \cdot 10^n-10^{n-1}=19 \cdot 10^{n-1}$.  As such we 
+rewrite the equation as follows\smallskip
 
-$\sum^N_{n=1}10^{n-1}d_n=\frac{(10^N-2*10^0)d_0}{19}$\bigskip
+\begin{equation} \label{eq:3}
+\sum^N_{n=1}10^{n-1}d_n=\frac{(10^N-2)d_0}{19}\smallskip
+\end{equation}
 
-\noindent Since we know that the left side of the equation is an 
-integer, we also know that the numerator of the right side had to be 
-divisible by 19! As such, we know that the following must be true
-\bigskip
+\noindent Since we know that the left side of the equation is an integer, we 
+also know that the numerator of the right side has to be divisible by 19!  
+As such, we know that one of the following must be true:\smallskip
 
-$10^N-2\equiv0 \ (mod \ 19)$\bigskip
+\begin{equation} \label{eq:1}
+10^N-2 \equiv 0 \ (mod \ 19)\smallskip
+\end{equation}
 
-\noindent [More explination of how to solve this]\bigskip
+\noindent \textit or \smallskip
 
-\noindent ... we get\bigskip
+\begin{equation} \label{eq:2}
+d_0 \equiv 0 \ (mod \ 19)\smallskip
+\end{equation}
 
-$N=17n+18 \mbox{ where } n \in \mathbb{Z}_{\geq 0}$\bigskip
+\noindent Because we previously defined $d_n \in \{0,1,2,\ldots,9\}$, we
+know that equation \ref{eq:2} is only true when $d_0=0$ but this solution is 
+trivial. Therefore, we will impose equation \ref{eq:1} which we can solve 
+for $N$ to get\smallskip
 
-\noindent This shows us that the smallest possible number that 
-satisfies the problem is 18 digits!  Once we set $N=18$ we observe 
-that the right side of equation - can only take on 10 different values 
-(i.e. each of the 10 possible values for $d_0$). Starting from $0$ we 
-find that $d_0=2$ is the first value to satisfy equation -.  We can now
- construct our number\bigskip
+\begin{equation}
+N=18n+17 \mbox{ where } n \in \mathbb{Z}_{\geq 0}\smallskip
+\end{equation}
 
-$10*\frac{(10^{18}-2)*2}{19}+2=\ldots$
+\noindent The smallest value that satisfies this equation is $n=0$ which 
+yields $N=17$.  Because out indexing begins at 0, we can deduce that the 
+smallest possible number that satisfies the problem is 18 digits!  Once we 
+set $N=17$ we observe that the right side of equation \ref{eq:3} becomes
+\smallskip
+
+\begin{equation}
+\sum^N_{n=1}10^{n-1}d_n=\frac{(10^{17}-2)d_0}{19}\smallskip
+\end{equation}
+
+\noindent We know see that the left side of the equation can only take one 
+of 10 different values (i.e. each of the 10 possible values for $d_0$) and 
+represents the first 17 digits of the solution.  Starting from 0, we find 
+that $d_0=2$ is the first value that satisfies equation \ref{eq:5}.  
+This is shown below\smallskip
+
+\begin{equation}
+\sum^N_{n=1}10^{n-1}d_n=1026315789473684\smallskip
+\end{equation}
+
+\noindent Appending $d_0$ to the end of this number yields the following
+number and the solution to the riddle.\smallskip  
+
+\begin{equation}
+10263157894736842\smallskip
+\end{equation}
+
+\noindent Move the 2 to the front of the number\smallskip
+
+\begin{equation}
+21026315789473684\smallskip
+\end{equation}
+
+\noindent and\smallskip
+
+\begin{align*}
+2 \ \cdot \ & 1026315789473684 \ 2 \\
+    = \ 2 \ & 1026315789473684
+\end{align*}
+
 
 \end{document}
