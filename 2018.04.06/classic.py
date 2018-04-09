@@ -1,6 +1,9 @@
+# Python 2
+
 from urllib2 import urlopen
 from bs4 import BeautifulSoup
 import csv
+from matplotlib import pyplot as plt
 
 class Game(object):
 
@@ -52,15 +55,30 @@ print('Team records have been created')
 # have been included in the transitive champion dictionary.
 
 champions = {'989': False}    # Villanova's ID
+champs_per_tier = []
 
 while not all(champions.values()):
+    tier_total = 0
     for champ, checked in champions.items():
         if not checked:
             for new_champ in records[champ]:
                 if new_champ not in champions.keys():
                     champions[new_champ] = False
+                    tier_total += 1
             champions[champ] = True
+    champs_per_tier.append(tier_total)
+
 print('Transitive champtions have been identified')
+
+# Create a plot of the number of new champions added
+# per "tier".  Villanova is a tier 1 champion.  Butler
+# would be a tier 2 champion since they beat Villanova.
+# Purdue is a tier 3 champion since they beat Butler, etc.
+
+plt.plot(champs_per_tier)
+plt.xlabel("Tier Number")
+plt.ylabel("Number of new teams")
+plt.savefig("new_champions_per_tier.png")
 
 # Match the champion's IDs with their names
 
