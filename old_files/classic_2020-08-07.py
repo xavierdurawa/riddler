@@ -11,7 +11,7 @@ def binomial_generator(n, p):
 
 
 num_nemotodes = 2
-num_generations = 4
+num_generations = 18
 prob = .5
 old_dist = {num_nemotodes: 1}
 new_dist = {}
