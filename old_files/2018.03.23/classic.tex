@@ -1,0 +1,111 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\begin{document}
+
+
+\section{Problem}
+
+"Imagine taking a number and moving its last digit to the front.
+For example, 1,234 would become 4,123. What is the smallest positive 
+integer such that when you do this, the result is exactly double the 
+original number? (For bonus points, solve this one without a 
+computer.)"
+
+\section{Solution}
+
+Let's begin by writing our numbers in the following form\smallskip
+
+\begin{equation}
+\begin{aligned}
+\label{eq:5} & 10^Nd_N+10^{N-1}d_{N-1}+\cdots+10^1d_1+10^0d_0 = 
+\sum^N_{n=0}10^nd_n \\ & \mbox{ where }d_n \in \{0,1,2,\ldots,9\}
+\end{aligned}
+\end{equation}
+\smallskip
+
+\noindent We are looking for a number that satisfies the following 
+equality\smallskip
+
+\begin{equation}
+2\sum^N_{n=0}10^nd_n=10^Nd_0+\sum^N_{n=1}10^{n-1}d_n\smallskip
+\end{equation}
+
+\noindent Rearranging we get\smallskip
+
+\begin{equation}
+\sum^N_{n=1}(2 \cdot 10^n-10^{n-1})d_n=(10^N-2 \cdot 10^0)d_0\smallskip
+\end{equation}
+
+\noindent Note that $2 \cdot 10^n-10^{n-1}=19 \cdot 10^{n-1}$.  As such we 
+rewrite the equation as follows\smallskip
+
+\begin{equation} \label{eq:3}
+\sum^N_{n=1}10^{n-1}d_n=\frac{(10^N-2)d_0}{19}\smallskip
+\end{equation}
+
+\noindent Since we know that the left side of the equation is an integer, we 
+also know that the numerator of the right side has to be divisible by 19!  
+As such, we know that one of the following must be true:\smallskip
+
+\begin{equation} \label{eq:1}
+10^N-2 \equiv 0 \ (mod \ 19)\smallskip
+\end{equation}
+
+\noindent \textit or \smallskip
+
+\begin{equation} \label{eq:2}
+d_0 \equiv 0 \ (mod \ 19)\smallskip
+\end{equation}
+
+\noindent Because we previously defined $d_n \in \{0,1,2,\ldots,9\}$, we
+know that equation \ref{eq:2} is only true when $d_0=0$ but this solution is 
+trivial. Therefore, we will impose equation \ref{eq:1} which we can solve 
+for $N$ to get\smallskip
+
+\begin{equation}
+N=18n+17 \mbox{ where } n \in \mathbb{Z}_{\geq 0}\smallskip
+\end{equation}
+
+\noindent The smallest value that satisfies this equation is $n=0$ which 
+yields $N=17$.  Because out indexing begins at 0, we can deduce that the 
+smallest possible number that satisfies the problem is 18 digits!  Once we 
+set $N=17$ we observe that the right side of equation \ref{eq:3} becomes
+\smallskip
+
+\begin{equation}
+\sum^N_{n=1}10^{n-1}d_n=\frac{(10^{17}-2)d_0}{19}\smallskip
+\end{equation}
+
+\noindent We know see that the left side of the equation can only take one 
+of 10 different values (i.e. each of the 10 possible values for $d_0$) and 
+represents the first 17 digits of the solution.  Starting from 0, we find 
+that $d_0=2$ is the first value that satisfies equation \ref{eq:5}.  
+This is shown below\smallskip
+
+\begin{equation}
+\sum^N_{n=1}10^{n-1}d_n=1026315789473684\smallskip
+\end{equation}
+
+\noindent Appending $d_0$ to the end of this number yields the following
+number and the solution to the riddle.\smallskip  
+
+\begin{equation}
+10263157894736842\smallskip
+\end{equation}
+
+\noindent Move the 2 to the front of the number\smallskip
+
+\begin{equation}
+21026315789473684\smallskip
+\end{equation}
+
+\noindent and\smallskip
+
+\begin{align*}
+2 \ \cdot \ & 1026315789473684 \ 2 \\
+    = \ 2 \ & 1026315789473684
+\end{align*}
+
+
+\end{document}
